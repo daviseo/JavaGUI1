@@ -15,23 +15,27 @@ public class GUIDemo extends JFrame
     private JPanel panel;
     private JButton biggerButton;
     private JButton smallerButton;
+    private JButton randomButton;
 
     /**
      * Set up the application.
      */
     public GUIDemo()
     {
-		setTitle("Bigger/Smaller");
+		setTitle("Bigger/Smaller/Other");
         setSize(200, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
         biggerButton = new JButton("BIGGER");
         smallerButton = new JButton("SMALLER");
+        randomButton = new JButton("RANDOM");
         biggerButton.addActionListener(new ButtonHandler());
         smallerButton.addActionListener(new ButtonHandler());
+        randomButton.addActionListener(new ButtonHandler());
         add(panel);
         panel.add(biggerButton);
         panel.add(smallerButton);
+        panel.add(randomButton);
         setVisible(true);
     }
 
@@ -53,9 +57,13 @@ public class GUIDemo extends JFrame
             {
                 setSize(size.width + 10, size.height + 10);
             }
-            else
+            else if (e.getSource().equals(smallerButton))
             {
                 setSize(size.width - 10, size.height - 10);
+            }
+            else
+            {
+                setSize((int) (Math.random() * size.width * 4), (int) (Math.random() * size.height * 4));
             }
 
         }
